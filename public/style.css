@@ -9,8 +9,16 @@
 
 html, body { height: 100%; }
 
+/* All gradients are derived from the flat theme colors with color-mix(),
+   so theme.css stays a simple list of ~12 solid colors. */
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(120% 90% at 50% -10%,
+      color-mix(in srgb, var(--bg), white 10%) 0%, transparent 60%),
+    radial-gradient(150% 100% at 50% 118%,
+      color-mix(in srgb, var(--bg), black 35%) 0%, transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-ui);
   -webkit-font-smoothing: antialiased;
@@ -53,7 +61,10 @@ body {
   height: 40px;
   border: none;
   border-radius: 50%;
-  background: var(--bg-inset);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--bg-inset), white 8%),
+    color-mix(in srgb, var(--bg-inset), black 10%));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white, transparent 88%);
   color: var(--text);
   display: grid;
   place-items: center;
@@ -81,7 +92,10 @@ body {
 
 .progress .seg.active {
   flex: 3;
-  background: var(--accent);
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent), white 18%),
+    var(--accent));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent), transparent 65%);
 }
 
 .progress .seg.done { background: var(--accent); opacity: 0.45; }
@@ -100,7 +114,10 @@ body {
   height: 100%;
   width: 0;
   border-radius: 3px;
-  background: var(--accent);
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent), white 18%),
+    var(--accent));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent), transparent 65%);
 }
 
 /* ---- Card container ------------------------------------------------------ */
@@ -116,10 +133,14 @@ body {
   padding: 24px;
 }
 
-/* Deck mode: horizontal snap scroller */
+/* Deck mode: horizontal snap scroller.
+   Cards hug their content: align-items lets each card end where its
+   content ends instead of stretching to the bottom of the screen. */
 .cards.deck {
   flex-direction: row;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 8px 8px 28px; /* room for the card's outer frame + shadow */
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
@@ -136,24 +157,33 @@ body {
 /* Feed mode: vertical stack */
 .cards.feed {
   flex-direction: column;
-  gap: 16px;
+  gap: 22px;
   overflow-y: auto;
   scrollbar-width: none;
-  padding-bottom: 24px;
+  padding: 8px 8px 32px; /* room for the card's outer frame + shadow */
 }
 .cards.feed::-webkit-scrollbar { display: none; }
 
-.cards.feed .card { flex: 0 0 auto; min-height: 60%; }
+.cards.feed .card { flex: 0 0 auto; }
 
 /* ---- Card ----------------------------------------------------------------- */
 
 .card {
-  background: var(--bg-card);
+  background:
+    linear-gradient(172deg,
+      color-mix(in srgb, var(--bg-card), white 9%) 0%,
+      var(--bg-card) 42%,
+      color-mix(in srgb, var(--bg-card), black 16%) 100%);
   border: 2px solid var(--card-border);
   border-radius: var(--radius);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white, transparent 86%),   /* top sheen        */
+    0 0 0 6px color-mix(in srgb, var(--bg-card), var(--bg) 62%), /* outer frame ring */
+    0 20px 45px -14px color-mix(in srgb, black, transparent 40%); /* drop shadow    */
   padding: 26px 24px 20px;
   display: flex;
   flex-direction: column;
+  max-height: 100%;
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -199,6 +229,7 @@ body {
   border: 2px solid transparent;
   border-radius: 14px;
   background: var(--bg-inset);
+  box-shadow: inset 0 2px 8px color-mix(in srgb, black, transparent 72%);
   color: var(--text);
   font-family: var(--font-ui);
   font-size: 17px;
@@ -229,8 +260,11 @@ textarea.field { min-height: 120px; }
 }
 
 .pill.selected {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--accent), white 12%),
+    color-mix(in srgb, var(--accent), black 8%));
+  border-color: color-mix(in srgb, var(--accent), white 15%);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent), transparent 70%);
   color: var(--accent-contrast);
   font-weight: 600;
 }
@@ -245,7 +279,12 @@ textarea.field { min-height: 120px; }
 .btn-submit {
   border: none;
   border-radius: 999px;
-  background: var(--accent);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--accent), white 14%),
+    color-mix(in srgb, var(--accent), black 10%));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white, transparent 70%),
+    0 6px 18px color-mix(in srgb, var(--accent), transparent 68%);
   color: var(--accent-contrast);
   font-family: var(--font-ui);
   font-size: 16px;
