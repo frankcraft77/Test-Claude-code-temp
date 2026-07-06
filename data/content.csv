@@ -1,0 +1,12 @@
+type,title,text,image,options,field_key
+text,The Clear Plan,"People hate the unknown. When you ask someone to buy your work, you ask them to take a blind leap. They freeze. A clear plan acts as a set of stones across a fast river. It shows them exactly where to put their feet next.
+
+Trust builds through small steps. You win sales by shrinking the gap between a problem and a fix. A bright light kills fear.",,,
+text,Why Talking Destroys Doing,"When you speak about your plans, your mind counts the early cheers as real progress. You spend your raw drive on getting claps instead of making things.
+
+History shows that the best work happens in the dark. Keep your mouth shut and let the final product make all the noise.",,,
+text,The Applause Tax,"Sam shipped his software in December. Leo stared at his own empty screen, realizing the hard truth. Bragging gave him the reward of winning upfront, leaving him with no fuel to build the product.",assets/illustration.svg,,
+choice,Your Turn,Which trap do you fall into most often?,,Talking too early|Overplanning|Waiting for perfect|None of these,biggest_trap
+input,Your Turn,"In one or two words, what are you building right now?",,,current_project
+longtext,Your Turn,What is one project you kept quiet about until it was finished? How did that feel?,,,quiet_project_story
+email,Stay in the Loop,Want the next chapter when it drops? Leave your email.,,,email

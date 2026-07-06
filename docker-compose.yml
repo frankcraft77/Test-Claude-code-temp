@@ -1,0 +1,10 @@
+services:
+  storycards:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      # CSVs live on the host: edit content.csv without rebuilding,
+      # and collected responses.csv survives container restarts.
+      - ./data:/app/data
+    restart: unless-stopped

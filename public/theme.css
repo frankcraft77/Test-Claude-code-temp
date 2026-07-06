@@ -1,0 +1,70 @@
+/* ==========================================================================
+   THEME — the only file you edit to reskin a project.
+   Change the variables below; the layout in style.css never changes.
+   ========================================================================== */
+
+/* Optional: load custom fonts here, then reference them in the variables.
+   Example (self-hosted, put the files in public/fonts/):
+
+   @font-face {
+     font-family: "MySerif";
+     src: url("fonts/my-serif.woff2") format("woff2");
+     font-display: swap;
+   }
+*/
+
+:root {
+  /* ---- Surfaces ------------------------------------------------------- */
+  --bg:             #2a0e0c;   /* page background (deepest tone)           */
+  --bg-card:        #431714;   /* card surface (a step lighter than --bg)  */
+  --bg-inset:       #351110;   /* input fields, wells inside the card      */
+  --card-border:    #7a4038;   /* subtle card outline                      */
+
+  /* ---- Text ----------------------------------------------------------- */
+  --text:           #f5e9dc;   /* main reading text                        */
+  --text-muted:     #c9a99a;   /* secondary text, icons, placeholders      */
+
+  /* ---- Accent --------------------------------------------------------- */
+  --accent:         #e8a87c;   /* progress, buttons, focus rings, pills    */
+  --accent-contrast:#2a0e0c;   /* text on top of the accent color          */
+  --progress-track: #5b2d27;   /* inactive progress segments               */
+
+  /* ---- Type ----------------------------------------------------------- */
+  --font-body:      Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --font-ui:        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* ---- Shape ---------------------------------------------------------- */
+  --radius:         20px;      /* card corner radius                       */
+}
+
+/* --------------------------------------------------------------------------
+   PRESETS — copy a block over the values above (or just uncomment it below
+   the :root block; later rules win).
+
+   NAVY
+   :root {
+     --bg: #0b1530; --bg-card: #182a52; --bg-inset: #111f3f;
+     --card-border: #2e4680;
+     --text: #eef2f8; --text-muted: #93a5c8;
+     --accent: #7ea2e8; --accent-contrast: #0b1530;
+     --progress-track: #26365c;
+   }
+
+   CREAM (light)
+   :root {
+     --bg: #efe7da; --bg-card: #faf5ec; --bg-inset: #f0e8db;
+     --card-border: #d8c9b2;
+     --text: #2f2418; --text-muted: #8a7a63;
+     --accent: #b4552d; --accent-contrast: #faf5ec;
+     --progress-track: #ddd0bc;
+   }
+
+   FOREST
+   :root {
+     --bg: #0e211a; --bg-card: #1a3529; --bg-inset: #132a20;
+     --card-border: #3d6650;
+     --text: #eaf3ec; --text-muted: #9dbcaa;
+     --accent: #a3d9a5; --accent-contrast: #0e211a;
+     --progress-track: #2a4a39;
+   }
+   ------------------------------------------------------------------------ */
