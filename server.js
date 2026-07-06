@@ -156,12 +156,9 @@ function handleSubmit(req, res) {
   });
 }
 
-function serveStatic(req, res) {
-  let urlPath = decodeURIComponent(req.url.split('?')[0]);
-  if (urlPath === '/') urlPath = '/index.html';
-
-  const filePath = path.normalize(path.join(PUBLIC_DIR, urlPath));
-  if (!filePath.startsWith(PUBLIC_DIR + path.sep)) return send(res, 403, 'Forbidden');
+function serveFrom(rootDir, urlPath, res) {
+  const filePath = path.normalize(path.join(rootDir, urlPath));
+  if (!filePath.startsWith(rootDir + path.sep)) return send(res, 403, 'Forbidden');
 
   fs.readFile(filePath, (err, buf) => {
     if (err) return send(res, 404, 'Not found');
@@ -171,9 +168,17 @@ function serveStatic(req, res) {
 }
 
 const server = http.createServer((req, res) => {
-  if (req.method === 'GET' && req.url.split('?')[0] === '/api/content') return serveContent(res);
-  if (req.method === 'POST' && req.url.split('?')[0] === '/api/submit') return handleSubmit(req, res);
-  if (req.method === 'GET' || req.method === 'HEAD') return serveStatic(req, res);
+  const urlPath = decodeURIComponent(req.url.split('?')[0]);
+  if (req.method === 'GET' && urlPath === '/api/content') return serveContent(res);
+  if (req.method === 'POST' && urlPath === '/api/submit') return handleSubmit(req, res);
+  if (req.method === 'GET' || req.method === 'HEAD') {
+    // Photos dropped into data/images/ on the host (volume-mounted) are
+    // served at /images/<file> — no rebuild needed.
+    if (urlPath.startsWith('/images/')) {
+      return serveFrom(path.join(DATA_DIR, 'images'), urlPath.slice('/images/'.length), res);
+    }
+    return serveFrom(PUBLIC_DIR, urlPath === '/' ? 'index.html' : urlPath, res);
+  }
   send(res, 405, 'Method not allowed');
 });
 

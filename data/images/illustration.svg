@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" role="img" aria-label="Figure working at a glowing screen">
+  <rect width="400" height="240" rx="12" fill="#241012"/>
+  <polygon points="0,240 260,240 400,40 400,0 200,0 0,140" fill="#7c2a24"/>
+  <polygon points="400,30 340,55 400,80" fill="#e8c79a"/>
+  <rect x="30" y="80" width="70" height="120" fill="#f0dcc0" opacity="0.9" rx="4"/>
+  <circle cx="65" cy="115" r="10" fill="#c96f4a"/>
+  <rect x="55" y="128" width="20" height="34" rx="8" fill="#c96f4a"/>
+  <rect x="48" y="98" width="34" height="16" rx="4" fill="#a8452f"/>
+  <rect x="250" y="110" width="110" height="80" rx="8" fill="#f4e8d0"/>
+  <rect x="242" y="186" width="126" height="12" rx="6" fill="#1b0c0d"/>
+  <path d="M150 240c10-60 45-95 80-95 28 0 44 22 50 45l-15 50z" fill="#2c1517"/>
+  <circle cx="238" cy="128" r="24" fill="#d98e63"/>
+  <path d="M214 120c-2-18 12-30 26-30s26 12 24 28c-8-10-34-12-50 2z" fill="#1b0c0d"/>
+  <path d="M252 148c8 2 16 10 18 20l-24 8c-2-12 0-22 6-28z" fill="#d98e63"/>
+</svg>

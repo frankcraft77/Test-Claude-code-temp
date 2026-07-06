@@ -73,6 +73,28 @@ open it in Excel/Numbers or filter by `field_key`. The server only accepts
 `field_key`s that actually appear in `content.csv`, caps submission size, and
 rate-limits by IP.
 
+## Images
+
+The `image` column accepts three kinds of value:
+
+| Value | Where the file lives |
+|---|---|
+| `images/photo.jpg` | **`data/images/` on your server** — the drop-in folder (see below). |
+| `assets/pic.svg` | `public/assets/`, baked into the app/Docker image. |
+| `https://…` | Any external URL. |
+
+**The drop-in folder is the intended workflow for photos.** `data/` is
+volume-mounted, so upload photos straight to the host — no rebuild, no
+restart:
+
+```bash
+scp holiday-*.jpg you@yourserver:/path/to/project/data/images/
+```
+
+Each file is then served at `/images/<filename>`, and that's exactly what you
+put in the CSV: `data/images/team.jpg` → `images/team.jpg` in the `image`
+column. Filenames are the URLs, so keep them lowercase with no spaces.
+
 ## Reskinning a project
 
 1. Copy the whole folder.
@@ -80,8 +102,11 @@ rate-limits by IP.
 3. Open `public/theme.css` and change the ~13 flat color variables (surfaces,
    text, accent, fonts, radius). style.css derives all gradients, sheens, and
    shadows from them automatically with `color-mix()`, so flat colors in →
-   layered depth out. The default palette is a warm light Cream; four
-   ready-made presets — Maroon, Navy, Meadow, Sky — are in the comments.
+   layered depth out. The default palette is Midnight Ink (dark blue-black,
+   amber accent); ready-made presets — Warm Charcoal, Cream, Maroon, Sky —
+   are in the comments. To recolor just the accent (buttons, pills, progress,
+   focus rings), change the single `--accent` line; alternates that work on
+   the dark surfaces are listed right next to it.
 4. Optionally flip `MODE` in `public/config.js` from `'deck'` (swipe,
    story-style) to `'feed'` (one vertical scroll).
 

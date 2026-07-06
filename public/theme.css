@@ -5,7 +5,7 @@
    How color works in this template:
    You define ~13 FLAT colors here. style.css turns them into layered
    gradients automatically with color-mix() — e.g. the card surface blends
-   --bg-card toward white at the top and toward black at the bottom, the
+   --bg-card toward white at the top and toward --bg at the bottom, the
    page gets a soft light bloom + vignette from --bg, and buttons/progress
    glow with --accent. So: pick flat colors, get depth for free.
    ========================================================================== */
@@ -22,20 +22,28 @@
 
 :root {
   /* ---- Surfaces ------------------------------------------------------- */
-  --bg:             #f3e7d3;   /* page background (deepest tone)           */
-  --bg-card:        #fdf8ef;   /* card surface (a step lighter than --bg)  */
-  --bg-inset:       #f0e3cd;   /* input fields, wells inside the card      */
-  --card-border:    #e2cda9;   /* subtle card outline                      */
+  --bg:             #0d1018;   /* page background (deepest tone)           */
+  --bg-card:        #1d2431;   /* card surface (a step lighter than --bg)  */
+  --bg-inset:       #141a25;   /* input fields, wells inside the card      */
+  --card-border:    #3d4a61;   /* subtle card outline                      */
 
   /* ---- Text ----------------------------------------------------------- */
-  --text:           #4b3a26;   /* main reading text                        */
-  --text-muted:     #a08a67;   /* secondary text, icons, placeholders      */
+  --text:           #eef0f4;   /* main reading text                        */
+  --text-muted:     #93a0b5;   /* secondary text, icons, placeholders      */
 
-  /* ---- Accent --------------------------------------------------------- */
-  --accent:         #e08b57;   /* progress, buttons, focus rings, pills    */
-  --accent-contrast:#fffaf2;   /* text on top of the accent color          */
-  --progress-track: #e5d3b4;   /* inactive progress segments               */
-  --error:          #c0492c;   /* inline validation messages               */
+  /* ---- Accent — swap this pair to recolor every button, pill, progress
+          bar, and focus ring at once. Alternates that work on these dark
+          surfaces (keep --accent-contrast as is):
+            amber    #f0b264   (default)
+            coral    #f28d76
+            mint     #7fd8b4
+            lavender #b9a7f2
+            sky      #7ea2e8                                               */
+  --accent:         #f0b264;
+  --accent-contrast:#161c28;   /* text on top of the accent color          */
+
+  --progress-track: #2c3444;   /* inactive progress segments               */
+  --error:          #ff9d8a;   /* inline validation messages               */
 
   /* ---- Type ----------------------------------------------------------- */
   --font-body:      Georgia, "Iowan Old Style", "Times New Roman", serif;
@@ -47,8 +55,25 @@
 
 /* --------------------------------------------------------------------------
    PRESETS — copy a block over the values above (or just uncomment it below
-   the :root block; later rules win). Dark presets should also override
-   --error with a lighter tone so it stays readable.
+   the :root block; later rules win).
+
+   WARM CHARCOAL (dark, neutral)
+   :root {
+     --bg: #14110c; --bg-card: #262019; --bg-inset: #1b1712;
+     --card-border: #4a4033;
+     --text: #f4ede1; --text-muted: #b5a68f;
+     --accent: #e8935e; --accent-contrast: #1d1913;
+     --progress-track: #3a332a; --error: #ff9d84;
+   }
+
+   CREAM (light, warm)
+   :root {
+     --bg: #f3e7d3; --bg-card: #fdf8ef; --bg-inset: #f0e3cd;
+     --card-border: #e2cda9;
+     --text: #4b3a26; --text-muted: #a08a67;
+     --accent: #e08b57; --accent-contrast: #fffaf2;
+     --progress-track: #e5d3b4; --error: #c0492c;
+   }
 
    MAROON (dark, dramatic)
    :root {
@@ -57,24 +82,6 @@
      --text: #f5e9dc; --text-muted: #c9a99a;
      --accent: #e8a87c; --accent-contrast: #2a0e0c;
      --progress-track: #5b2d27; --error: #ff8f7a;
-   }
-
-   NAVY (dark, focused)
-   :root {
-     --bg: #0b1530; --bg-card: #182a52; --bg-inset: #111f3f;
-     --card-border: #2e4680;
-     --text: #eef2f8; --text-muted: #93a5c8;
-     --accent: #7ea2e8; --accent-contrast: #0b1530;
-     --progress-track: #26365c; --error: #ff9d8a;
-   }
-
-   MEADOW (light, fresh)
-   :root {
-     --bg: #e7f0e2; --bg-card: #f8fcf5; --bg-inset: #e2ecda;
-     --card-border: #c4d8b8;
-     --text: #2f4029; --text-muted: #7f957a;
-     --accent: #5f9e62; --accent-contrast: #f8fcf5;
-     --progress-track: #d3e2c8; --error: #b74a30;
    }
 
    SKY (light, airy)
