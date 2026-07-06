@@ -1,6 +1,13 @@
 /* ==========================================================================
    THEME — the only file you edit to reskin a project.
    Change the variables below; the layout in style.css never changes.
+
+   How color works in this template:
+   You define ~13 FLAT colors here. style.css turns them into layered
+   gradients automatically with color-mix() — e.g. the card surface blends
+   --bg-card toward white at the top and toward black at the bottom, the
+   page gets a soft light bloom + vignette from --bg, and buttons/progress
+   glow with --accent. So: pick flat colors, get depth for free.
    ========================================================================== */
 
 /* Optional: load custom fonts here, then reference them in the variables.
@@ -15,19 +22,20 @@
 
 :root {
   /* ---- Surfaces ------------------------------------------------------- */
-  --bg:             #2a0e0c;   /* page background (deepest tone)           */
-  --bg-card:        #431714;   /* card surface (a step lighter than --bg)  */
-  --bg-inset:       #351110;   /* input fields, wells inside the card      */
-  --card-border:    #7a4038;   /* subtle card outline                      */
+  --bg:             #f3e7d3;   /* page background (deepest tone)           */
+  --bg-card:        #fdf8ef;   /* card surface (a step lighter than --bg)  */
+  --bg-inset:       #f0e3cd;   /* input fields, wells inside the card      */
+  --card-border:    #e2cda9;   /* subtle card outline                      */
 
   /* ---- Text ----------------------------------------------------------- */
-  --text:           #f5e9dc;   /* main reading text                        */
-  --text-muted:     #c9a99a;   /* secondary text, icons, placeholders      */
+  --text:           #4b3a26;   /* main reading text                        */
+  --text-muted:     #a08a67;   /* secondary text, icons, placeholders      */
 
   /* ---- Accent --------------------------------------------------------- */
-  --accent:         #e8a87c;   /* progress, buttons, focus rings, pills    */
-  --accent-contrast:#2a0e0c;   /* text on top of the accent color          */
-  --progress-track: #5b2d27;   /* inactive progress segments               */
+  --accent:         #e08b57;   /* progress, buttons, focus rings, pills    */
+  --accent-contrast:#fffaf2;   /* text on top of the accent color          */
+  --progress-track: #e5d3b4;   /* inactive progress segments               */
+  --error:          #c0492c;   /* inline validation messages               */
 
   /* ---- Type ----------------------------------------------------------- */
   --font-body:      Georgia, "Iowan Old Style", "Times New Roman", serif;
@@ -39,32 +47,42 @@
 
 /* --------------------------------------------------------------------------
    PRESETS — copy a block over the values above (or just uncomment it below
-   the :root block; later rules win).
+   the :root block; later rules win). Dark presets should also override
+   --error with a lighter tone so it stays readable.
 
-   NAVY
+   MAROON (dark, dramatic)
+   :root {
+     --bg: #2a0e0c; --bg-card: #431714; --bg-inset: #351110;
+     --card-border: #7a4038;
+     --text: #f5e9dc; --text-muted: #c9a99a;
+     --accent: #e8a87c; --accent-contrast: #2a0e0c;
+     --progress-track: #5b2d27; --error: #ff8f7a;
+   }
+
+   NAVY (dark, focused)
    :root {
      --bg: #0b1530; --bg-card: #182a52; --bg-inset: #111f3f;
      --card-border: #2e4680;
      --text: #eef2f8; --text-muted: #93a5c8;
      --accent: #7ea2e8; --accent-contrast: #0b1530;
-     --progress-track: #26365c;
+     --progress-track: #26365c; --error: #ff9d8a;
    }
 
-   CREAM (light)
+   MEADOW (light, fresh)
    :root {
-     --bg: #efe7da; --bg-card: #faf5ec; --bg-inset: #f0e8db;
-     --card-border: #d8c9b2;
-     --text: #2f2418; --text-muted: #8a7a63;
-     --accent: #b4552d; --accent-contrast: #faf5ec;
-     --progress-track: #ddd0bc;
+     --bg: #e7f0e2; --bg-card: #f8fcf5; --bg-inset: #e2ecda;
+     --card-border: #c4d8b8;
+     --text: #2f4029; --text-muted: #7f957a;
+     --accent: #5f9e62; --accent-contrast: #f8fcf5;
+     --progress-track: #d3e2c8; --error: #b74a30;
    }
 
-   FOREST
+   SKY (light, airy)
    :root {
-     --bg: #0e211a; --bg-card: #1a3529; --bg-inset: #132a20;
-     --card-border: #3d6650;
-     --text: #eaf3ec; --text-muted: #9dbcaa;
-     --accent: #a3d9a5; --accent-contrast: #0e211a;
-     --progress-track: #2a4a39;
+     --bg: #e4edf6; --bg-card: #f7fafd; --bg-inset: #dfe9f2;
+     --card-border: #bdd2e4;
+     --text: #29394a; --text-muted: #7c92a8;
+     --accent: #4d8fd1; --accent-contrast: #f7fafd;
+     --progress-track: #cfdfec; --error: #c0492c;
    }
    ------------------------------------------------------------------------ */

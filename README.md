@@ -77,9 +77,11 @@ rate-limits by IP.
 
 1. Copy the whole folder.
 2. Replace `data/content.csv`.
-3. Open `public/theme.css` and change the ~12 variables (surfaces, text,
-   accent, fonts, radius). Four ready-made palettes — Maroon (default), Navy,
-   Cream, Forest — are included in the comments.
+3. Open `public/theme.css` and change the ~13 flat color variables (surfaces,
+   text, accent, fonts, radius). style.css derives all gradients, sheens, and
+   shadows from them automatically with `color-mix()`, so flat colors in →
+   layered depth out. The default palette is a warm light Cream; four
+   ready-made presets — Maroon, Navy, Meadow, Sky — are in the comments.
 4. Optionally flip `MODE` in `public/config.js` from `'deck'` (swipe,
    story-style) to `'feed'` (one vertical scroll).
 
