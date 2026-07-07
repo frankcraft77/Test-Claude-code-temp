@@ -1,0 +1,5 @@
+# Copy to ./Caddyfile and replace with your real subdomain.
+# Caddy fetches and renews the Let's Encrypt certificate automatically.
+stories.example.com {
+    reverse_proxy storycards:8080
+}

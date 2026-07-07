@@ -1,0 +1,24 @@
+# Production setup: app + Caddy reverse proxy with automatic HTTPS.
+#   1. cp Caddyfile.example Caddyfile   (put your real subdomain in it)
+#   2. docker compose -f docker-compose.prod.yml up -d --build
+services:
+  storycards:
+    build: .
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

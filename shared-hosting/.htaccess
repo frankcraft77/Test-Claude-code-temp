@@ -1,0 +1,5 @@
+# Only needed if submit.php is configured to write responses.csv inside
+# the web root — blocks anyone from downloading collected answers.
+<Files "responses.csv">
+    Require all denied
+</Files>

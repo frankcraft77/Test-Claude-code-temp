@@ -34,6 +34,39 @@ node server.js
 > submissions return a 500, make the mounted folder writable for it:
 > `sudo chown -R 1000:1000 data`
 
+For production behind HTTPS, use `docker-compose.prod.yml` + `Caddyfile.example`
+(Caddy terminates TLS with automatic Let's Encrypt certificates).
+
+## Shared hosting — file access only, no Docker
+
+The frontend is plain static files and the backend can be one PHP file, so the
+template also runs on any host where you can only upload files (cPanel, FTP,
+SFTP). Upload this layout into the subdomain's document root:
+
+```
+index.html  style.css  theme.css  config.js  app.js     from public/
+assets/                                                  from public/assets/
+content.csv                                              your content
+images/                                                  your photos
+submit.php  .htaccess                                    from shared-hosting/
+```
+
+Then edit `config.js` so the app reads files directly and posts to PHP:
+
+```js
+CONTENT_URL: 'content.csv',
+SUBMIT_URL: 'submit.php'
+```
+
+Submissions are appended to `storydeck-responses.csv` **one level above the
+document root**, where nobody can download them; download via your file
+manager or SFTP. If your host doesn't allow writing there, open `submit.php`
+and switch to the in-webroot line — the included `.htaccess` then blocks
+public access to the file.
+
+No PHP either? Set `SUBMIT_URL: ''` — input cards are skipped and the site
+runs as a pure static story deck.
+
 ## How it works
 
 | Path | Purpose |

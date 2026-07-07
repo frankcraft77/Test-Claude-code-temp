@@ -188,7 +188,7 @@
       }
       btn.disabled = true;
       note.textContent = '';
-      fetch('/api/submit', {
+      fetch(CFG.SUBMIT_URL || '/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ field_key: row.field_key || 'answer', value: value })
@@ -243,6 +243,11 @@
   /* ---- Boot ---- */
 
   function render(rows) {
+    // Display-only mode: with no submit endpoint configured, input cards
+    // can't save anything, so show story cards only.
+    if (CFG.SUBMIT_URL === '') {
+      rows = rows.filter(function (row) { return !INPUT_TYPES[row.type]; });
+    }
     cards = rows;
     elCards.innerHTML = '';
     elCards.classList.add(MODE);
@@ -306,7 +311,7 @@
   elTitle.textContent = CFG.APP_TITLE || '';
   document.title = CFG.APP_TITLE || document.title;
 
-  fetch('/api/content')
+  fetch(CFG.CONTENT_URL || '/api/content')
     .then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.text();
