@@ -133,25 +133,38 @@ body {
   padding: 24px;
 }
 
-/* Deck mode: horizontal snap scroller.
-   Cards hug their content: align-items lets each card end where its
-   content ends instead of stretching to the bottom of the screen. */
+/* Deck mode: single-card stage. Cards are absolutely positioned, laid out
+   edge-to-edge, and driven entirely by app.js's pointer-drag state machine.
+   Only the current card is laid out at rest; a neighbor gains .is-active
+   transiently while a gesture reveals it, always exactly one stage-size
+   away — so cards never spatially overlap and z-index is just a safety
+   net (pointer-events is what actually gates interactivity). Everything
+   else stays display:none. */
 .cards.deck {
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
   padding: 8px 8px 28px; /* room for the card's outer frame + shadow */
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
 }
-.cards.deck::-webkit-scrollbar { display: none; }
 
 .cards.deck .card {
-  flex: 0 0 100%;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  user-select: none;
+}
+
+.cards.deck .card .field { user-select: text; }
+
+.cards.deck .card.is-active { display: flex; will-change: transform; }
+.cards.deck .card.is-current { z-index: 2; pointer-events: auto; }
+.cards.deck .card:not(.is-current) { z-index: 1; pointer-events: none; }
+.cards.deck .card.settling { transition: transform 260ms cubic-bezier(.22,.61,.36,1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cards.deck .card.settling { transition-duration: 0ms; }
 }
 
 /* Feed mode: vertical stack */
